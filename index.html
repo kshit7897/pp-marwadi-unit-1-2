@@ -1,0 +1,814 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="305 MCQs for BCA Sem 1 Programming Practices-1 (Unit 1 & 2) with practice mode and 20-question mock test.">
+<title>PP-1 MCQ Practice</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700&family=JetBrains+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: one exam-sheet column; toolbar on top, question card with OMR-style bubbles, answer grid for mock tests */
+:root {
+  --bg: #F2F4F8;
+  --surface: #FFFFFF;
+  --ink: #142033;
+  --muted: #5A6678;
+  --line: #D8DEE8;
+  --accent: #2347A8;
+  --accent-soft: #E5EBFA;
+  --good: #1D7748;
+  --good-soft: #E2F2E8;
+  --bad: #B2322E;
+  --bad-soft: #FAE6E5;
+  --code-bg: #EEF1F6;
+  --font-display: "Bricolage Grotesque", "Segoe UI", system-ui, sans-serif;
+  --font-body: "Atkinson Hyperlegible", "Segoe UI", system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", Consolas, "Courier New", monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0E131B; --surface: #161D28; --ink: #E5EAF2; --muted: #98A3B4; --line: #2A3444;
+    --accent: #8EAEFF; --accent-soft: #1D2944; --good: #5CC98F; --good-soft: #142E20;
+    --bad: #F08B85; --bad-soft: #3A1D1C; --code-bg: #0F151F; color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0E131B; --surface: #161D28; --ink: #E5EAF2; --muted: #98A3B4; --line: #2A3444;
+  --accent: #8EAEFF; --accent-soft: #1D2944; --good: #5CC98F; --good-soft: #142E20;
+  --bad: #F08B85; --bad-soft: #3A1D1C; --code-bg: #0F151F; color-scheme: dark;
+}
+* { box-sizing: border-box; }
+html { color-scheme: light dark; }
+body { margin: 0; }
+[hidden] { display: none !important; }
+body {
+  background: var(--bg); color: var(--ink); font-family: var(--font-body); font-size: 16px; line-height: 1.5;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+  padding-block: 24px 48px;
+}
+.wrap { max-width: 760px; margin: 0 auto; display: grid; gap: 20px; }
+header { display: grid; gap: 6px; }
+.eyebrow { font-size: 12px; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); font-weight: 700; }
+h1 { font-family: var(--font-display); font-size: clamp(28px, 6vw, 40px); line-height: 1.1; margin: 0; text-wrap: balance; }
+.sub { color: var(--muted); margin: 0; max-width: 62ch; }
+
+.toolbar { display: grid; gap: 12px; background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 14px; }
+.row { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+.label { font-size: 12px; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); font-weight: 700; min-width: 64px; }
+.seg { display: inline-flex; border: 1px solid var(--line); border-radius: 999px; padding: 3px; gap: 2px; flex-wrap: wrap; }
+.seg button, .chip {
+  font: inherit; font-size: 14px; border: 0; background: transparent; color: var(--ink);
+  padding: 6px 12px; border-radius: 999px; cursor: pointer;
+}
+.seg button[aria-pressed="true"] { background: var(--accent); color: var(--surface); font-weight: 700; }
+.chip { border: 1px solid var(--line); }
+.chip[aria-pressed="true"] { border-color: var(--accent); background: var(--accent-soft); color: var(--ink); font-weight: 700; }
+.chip .n { color: var(--muted); font-variant-numeric: tabular-nums; margin-left: 4px; font-weight: 400; }
+select { font: inherit; font-size: 14px; color: var(--ink); background: var(--surface); border: 1px solid var(--line); border-radius: 8px; padding: 6px 10px; max-width: 100%; }
+.btn {
+  font: inherit; font-weight: 700; font-size: 15px; border-radius: 10px; padding: 10px 18px; cursor: pointer;
+  border: 1px solid var(--line); background: var(--surface); color: var(--ink);
+}
+.btn.primary { background: var(--accent); border-color: var(--accent); color: var(--surface); }
+.btn:disabled { opacity: .45; cursor: not-allowed; }
+button:focus-visible, select:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.spacer { flex: 1; }
+.best { font-size: 13px; color: var(--muted); font-variant-numeric: tabular-nums; }
+
+.card { background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 20px; display: grid; gap: 16px; min-width: 0; }
+.meta { display: flex; flex-wrap: wrap; gap: 8px 16px; align-items: baseline; justify-content: space-between; font-size: 14px; color: var(--muted); }
+.meta strong { color: var(--ink); font-variant-numeric: tabular-nums; }
+.tag { font-size: 12px; border: 1px solid var(--line); border-radius: 999px; padding: 2px 10px; }
+.bar { height: 4px; background: var(--line); border-radius: 4px; overflow: hidden; }
+.bar > i { display: block; height: 100%; background: var(--accent); transition: width .2s; }
+.qtext { font-size: 19px; font-weight: 700; margin: 0; text-wrap: pretty; }
+code { font-family: var(--font-mono); font-size: .88em; background: var(--code-bg); border-radius: 4px; padding: 1px 5px; }
+pre { margin: 0; background: var(--code-bg); border: 1px solid var(--line); border-radius: 10px; padding: 12px 14px; overflow-x: auto; font-family: var(--font-mono); font-size: 14px; line-height: 1.55; }
+
+.opts { display: grid; gap: 8px; list-style: none; margin: 0; padding: 0; }
+.opt {
+  width: 100%; display: flex; gap: 12px; align-items: flex-start; text-align: left; font: inherit; color: var(--ink);
+  background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 10px 12px; cursor: pointer;
+}
+.opt:hover:not(:disabled) { border-color: var(--accent); }
+.opt:disabled { cursor: default; }
+.bubble {
+  flex: none; width: 28px; height: 28px; border-radius: 50%; border: 2px solid var(--muted);
+  display: grid; place-items: center; font-weight: 700; font-size: 13px; color: var(--muted);
+}
+.otext { min-width: 0; padding-top: 2px; overflow-wrap: anywhere; }
+.opt.sel { border-color: var(--accent); background: var(--accent-soft); }
+.opt.sel .bubble { background: var(--accent); border-color: var(--accent); color: var(--surface); }
+.opt.right { border-color: var(--good); background: var(--good-soft); }
+.opt.right .bubble { background: var(--good); border-color: var(--good); color: var(--surface); }
+.opt.wrong { border-color: var(--bad); background: var(--bad-soft); }
+.opt.wrong .bubble { background: var(--bad); border-color: var(--bad); color: var(--surface); }
+
+.feedback { border-radius: 10px; padding: 10px 14px; font-size: 15px; }
+.feedback.ok { background: var(--good-soft); color: var(--ink); border-left: 4px solid var(--good); }
+.feedback.no { background: var(--bad-soft); color: var(--ink); border-left: 4px solid var(--bad); }
+.nav { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
+.hint { font-size: 13px; color: var(--muted); }
+
+.grid { display: grid; grid-template-columns: repeat(10, minmax(0, 1fr)); gap: 6px; }
+.cell {
+  font: inherit; font-size: 13px; font-variant-numeric: tabular-nums; aspect-ratio: 1; max-width: 100%;
+  border-radius: 8px; border: 1px solid var(--line); background: var(--surface); color: var(--ink); cursor: pointer;
+}
+.cell.done { background: var(--accent-soft); border-color: var(--accent); }
+.cell.cur { outline: 2px solid var(--accent); outline-offset: 1px; font-weight: 700; }
+.cell.right { background: var(--good-soft); border-color: var(--good); }
+.cell.wrong { background: var(--bad-soft); border-color: var(--bad); }
+
+.score { display: flex; flex-wrap: wrap; align-items: baseline; gap: 8px 20px; }
+.big { font-family: var(--font-display); font-size: 56px; line-height: 1; font-variant-numeric: tabular-nums; }
+.review { display: grid; gap: 12px; }
+.ritem { border-top: 1px solid var(--line); padding-top: 12px; display: grid; gap: 6px; }
+.ritem .q { font-weight: 700; }
+.ritem .a { font-size: 15px; }
+.ritem .a b.r { color: var(--good); }
+.ritem .a b.w { color: var(--bad); }
+.stats { display: flex; gap: 16px; font-size: 14px; color: var(--muted); font-variant-numeric: tabular-nums; flex-wrap: wrap; }
+.stats b.g { color: var(--good); } .stats b.r { color: var(--bad); }
+
+@media (max-width: 480px) {
+  .grid { grid-template-columns: repeat(5, minmax(0, 1fr)); }
+  .qtext { font-size: 17px; }
+  .card { padding: 16px; }
+}
+@media (prefers-reduced-motion: reduce) { .bar > i { transition: none; } }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div class="eyebrow">C05BC3103 · Programming Practices-1 · BCA Sem 1 · Mid-Sem</div>
+    <h1>PP-1 MCQ Practice</h1>
+    <p class="sub">305 MCQs from Unit 1 and Unit 2. Practice gives the answer right away; Mock test gives 20 random questions, just like the exam, and scores you at the end.</p>
+  </header>
+
+  <section class="toolbar" aria-label="Test settings">
+    <div class="row">
+      <span class="label">Mode</span>
+      <div class="seg" role="group" aria-label="Mode">
+        <button type="button" id="m-practice" data-mode="practice" aria-pressed="true">Practice</button>
+        <button type="button" id="m-mock" data-mode="mock" aria-pressed="false">Mock test · 20 Q</button>
+      </div>
+    </div>
+    <div class="row">
+      <span class="label">Section</span>
+      <div class="row" id="sections" role="group" aria-label="Section"></div>
+    </div>
+    <div class="row">
+      <span class="label">Topic</span>
+      <select id="topic" aria-label="Topic"></select>
+      <label class="hint" style="display:flex;gap:6px;align-items:center"><input type="checkbox" id="shuf"> Shuffle order</label>
+      <span class="spacer"></span>
+      <button type="button" class="btn" id="restart">New set</button>
+    </div>
+    <div class="best" id="best"></div>
+  </section>
+
+  <main id="app" aria-live="polite"></main>
+</div>
+
+<script>
+const TOPICS = {
+  U1A:'Program & its types', U1B:'PDLC', U1C:'Programming languages', U1D:'Generations (1GL–5GL)',
+  U1E:'Compiler & interpreter', U1F:'Good language features', U1G:'Algorithm', U1H:'Flowchart',
+  U2A:'Intro & history of C', U2B:'Characteristics & features', U2C:'Structure of C program', U2D:'Compile, link, run',
+  U2E:'Character set & tokens', U2F:'Keywords', U2G:'Identifiers', U2H:'Data types & modifiers',
+  U2I:'Storage classes', U2J:'Variables & constants', U2K:'Escape sequences', U2L:'Symbolic constants',
+  OUT:'C output & errors'
+};
+const BANK = [];
+function q(t, text, o, a, note, code) { BANK.push({ t, text, o, a, note: note || '', code: code || '' }); }
+
+/* ---------- Unit 1 ---------- */
+q('U1A','A program is a ________.',['single instruction','logically related set of instructions arranged in sequence','hardware device','type of memory'],1);
+q('U1A','Which of the following is a system program?',['MS Word','Compiler','Paint','Calculator'],1,'Compilers, interpreters, OS and drivers are system programs.');
+q('U1A','Which of the following is an application program?',['Device driver','Operating system','Video game','Interpreter'],2);
+q('U1A','A program that directly interacts with hardware is called ________.',['Application program','System program','Utility game','Web page'],1);
+q('U1A','An application program runs on ________.',['the operating system','the CPU register only','the compiler','the assembler'],0);
+q('U1A','Which one is NOT a system program?',['Linux','Android','Device driver','MS Excel'],3);
+q('U1A','How many basic types of computer programs are discussed in the syllabus?',['1','2','3','4'],1,'System and application.');
+q('U1A','Which real-life example was used in the slides to explain a program?',['Washing machine','ATM','Traffic light','Calculator'],1);
+q('U1B','PDLC stands for ________.',['Program Design Logic Cycle','Program Development Life Cycle','Process Development Logic Code','Program Data Life Cycle'],1);
+q('U1B','How many steps are there in PDLC?',['4','5','6','7'],2);
+q('U1B','The first step of PDLC is ________.',['Coding','Problem Definition','Problem Analysis','Testing'],1);
+q('U1B','The last step of PDLC is ________.',['Testing & Debugging','Coding','Maintenance','Documentation'],2);
+q('U1B','Identifying the variables and functions needed happens in ________.',['Problem Definition','Problem Analysis','Coding','Maintenance'],1);
+q('U1B','Writing the step-by-step solution of the problem happens in ________.',['Algorithm Development','Testing','Maintenance','Problem Definition'],0);
+q('U1B','According to the slides, which PDLC stage is crucial to the creation of programs?',['Maintenance','Algorithm Development','Testing','Problem Definition'],1);
+q('U1B','The real program is written in C, C++ or Java during ________.',['Problem Analysis','Coding & Documentation','Maintenance','Algorithm Development'],1);
+q('U1B','Checking the program with different input values is done in ________.',['Testing & Debugging','Coding','Problem Analysis','Problem Definition'],0);
+q('U1B','The phase in which users are actively using the program is ________.',['Testing','Coding','Maintenance','Analysis'],2);
+q('U1B','Which step comes immediately after Algorithm Development?',['Problem Analysis','Coding & Documentation','Testing','Maintenance'],1);
+q('U1B','Which step comes immediately before Testing & Debugging?',['Maintenance','Algorithm Development','Coding & Documentation','Problem Analysis'],2);
+q('U1B','Finding and removing errors from a program is called ________.',['Compiling','Debugging','Linking','Loading'],1);
+q('U1B','Understanding the problem description and the expected outcome is done in ________.',['Problem Definition','Coding','Maintenance','Testing'],0);
+q('U1B','If an improvement is found during Maintenance, what happens?',['The program is deleted','Every step is carried out once more','Only testing is repeated','Nothing'],1);
+q('U1C','A computer directly understands ________.',['C language','English','Machine language (binary)','Assembly language'],2);
+q('U1C','Binary language uses the digits ________.',['0 to 9','0 and 1','1 and 2','A to F'],1);
+q('U1C','The basic purpose of a programming language is to ________.',['design hardware','develop software that solves a given problem','repair computers','store data only'],1);
+q('U1C','Syntax of a language means ________.',['the meaning of statements','the rules for how statements must be written','the output of a program','the speed of a program'],1);
+q('U1C','Semantics of a language means ________.',['the spelling rules','the meaning, i.e. what the code does when executed','the size of the code','the comments'],1);
+q('U1C','Which of the following is NOT a programming language?',['COBOL','FORTRAN','Pascal','MS Word'],3);
+q('U1C','IDE in "Environment and tools" stands for ________.',['Integrated Development Environment','Internal Data Entry','Input Device Editor','Integrated Debug Engine'],0);
+q('U1D','How many generations of programming languages are there?',['3','4','5','6'],2);
+q('U1D','Low-level languages include ________.',['1GL and 2GL','2GL and 3GL','3GL and 4GL','4GL and 5GL'],0);
+q('U1D','High-level languages include ________.',['1GL, 2GL','3GL, 4GL, 5GL','only 3GL','only 5GL'],1);
+q('U1D','The first generation language is ________.',['Assembly language','Machine language','C','SQL'],1);
+q('U1D','The second generation language is ________.',['Machine language','Assembly language','FORTRAN','Prolog'],1);
+q('U1D','C belongs to which generation?',['1GL','2GL','3GL','4GL'],2);
+q('U1D','SQL is an example of ________.',['2GL','3GL','4GL','5GL'],2);
+q('U1D','Prolog is an example of ________.',['2GL','3GL','4GL','5GL'],3);
+q('U1D','Mercury is a ________ language.',['2GL','3GL','4GL','5GL'],3);
+q('U1D','FORTRAN and COBOL belong to ________.',['1GL','2GL','3GL','5GL'],2);
+q('U1D','VBScript and AppleScript belong to ________.',['2GL','3GL','4GL','5GL'],2);
+q('U1D','The only language the computer understands without translation is ________.',['Assembly','Machine language','C','Python'],1);
+q('U1D','The main advantage of machine language is ________.',['easy to learn','portable','runs very fast because the CPU executes it directly','easy to edit'],2);
+q('U1D','Machine language and assembly language are both ________.',['machine independent','machine dependent','non-procedural','used in AI'],1);
+q('U1D','Assembly language uses ________ to represent machine instructions.',['only 0 and 1','symbols (mnemonics) such as LD, ADD','English sentences','pictures'],1);
+q('U1D','The translator that converts assembly language into machine language is ________.',['Compiler','Interpreter','Assembler','Linker'],2);
+q('U1D','An assembly language statement consists of ________.',['label and operation code','only numbers','keyword and header file','class and object'],0);
+q('U1D','`LD A, 5` and `ADD A,B` are examples of ________.',['Machine code','Assembly code','C code','SQL'],1);
+q('U1D','In which language must the programmer know the logical structure of the computer?',['Assembly language','SQL','Prolog','Python'],0);
+q('U1D','Programs written in 3GL are ________ between machines.',['not portable','portable','machine dependent','not translatable'],1);
+q('U1D','4GLs are ________ languages.',['procedural','non-procedural','binary','assembly'],1,'You say what to do, not how.');
+q('U1D','In a procedural language, the programmer tells the computer ________.',['only what to do','how a task is done','nothing','only the output'],1);
+q('U1D','Which characteristic belongs to 4GL?',['Code written in 0s and 1s','English-like sentences, fewer lines of code','Uses only mnemonics','Machine dependent'],1);
+q('U1D','5GLs solve problems using ________.',['an algorithm written by the programmer','constraints given to the program','binary code','mnemonics'],1);
+q('U1D','5GLs are widely used in ________.',['Banking','Artificial Intelligence research','Device drivers','Spreadsheets'],1);
+q('U1D','Which generation contains visual tools to help develop a program?',['2GL','3GL','4GL','5GL'],3);
+q('U1D','The term "levels" of programming languages is connected to ________.',['generations of computers / advances in technology','size of RAM','number of keywords','speed of internet'],0);
+q('U1E','A compiler translates ________.',['one line at a time','the entire program at once before execution','only comments','only header files'],1);
+q('U1E','An interpreter translates ________.',['one statement at a time','the whole program at once','only machine code','assembly code'],0);
+q('U1E','The original high-level program given to a compiler is called the ________.',['object program','source program','executable','machine program'],1);
+q('U1E','The machine-language program produced by a compiler is called the ________.',['source program','object program','algorithm','flowchart'],1);
+q('U1E','Which language uses a compiler (as per slides)?',['Python','PHP','C','Ruby'],2);
+q('U1E','Which language uses an interpreter?',['C','C++','Python','Assembly'],2);
+q('U1E','PHP, Perl and Ruby use a(n) ________.',['Compiler','Interpreter','Assembler','Loader'],1);
+q('U1E','A compiler or interpreter is itself a ________.',['hardware device','computer program','keyword','header file'],1);
+q('U1E','Translators that convert high-level language into machine language are ________.',['Assemblers only','Compilers and interpreters','Loaders','Editors'],1);
+q('U1F','Code that can run on any computer system shows ________.',['Robustness','Portability / platform independence','Readability','Efficiency'],1);
+q('U1F','A language in which code is easy to modify and extend is ________.',['Maintainable','Portable','Efficient','Robust'],0);
+q('U1F','Features that help write error-free and reliable programs are called ________.',['Simplicity','Robustness','Portability','Readability'],1);
+q('U1F','Efficient execution in terms of time and memory is called ________.',['Efficiency','Readability','Maintainability','Simplicity'],0);
+q('U1F','Code that is easy to read and understand shows ________.',['Robustness','Readability','Portability','Efficiency'],1);
+q('U1F','Which is NOT a feature of a good programming language?',['Readability','Portability','Machine dependence','Simplicity'],2);
+q('U1F','A good language should be learnable ________.',['only with long training','without explicit training','only by experts','never'],1);
+q('U1G','An algorithm is a ________.',['graphical representation','step-by-step procedure to solve a problem in a finite number of steps','programming language','hardware'],1);
+q('U1G','An algorithm gives the ________ of a program.',['output','logic','hardware','memory'],1);
+q('U1G','Every algorithm starts with ________.',['STOP','START / BEGIN','PRINT','READ'],1);
+q('U1G','Every algorithm ends with ________.',['START','STOP / END','INPUT','GOTO'],1);
+q('U1G','Which keyword is used for input in an algorithm?',['PRINT','WRITE','READ / INPUT','STOP'],2);
+q('U1G','Which keyword is used for output in an algorithm?',['READ','INPUT','PRINT / WRITE','BEGIN'],2);
+q('U1G','The three key features of an algorithm are ________.',['Input, Output, Process','Sequence, Decision, Repetition','Start, Stop, Print','Compile, Link, Run'],1);
+q('U1G','Each step executed in the specified order is called ________.',['Sequence','Decision','Repetition','Iteration'],0);
+q('U1G','When the outcome depends on a condition, the algorithm uses ________.',['Sequence','Decision','Repetition','Termination'],1);
+q('U1G','Executing one or more steps a number of times is called ________.',['Sequence','Decision','Repetition','Selection'],2);
+q('U1G','Repetition can be implemented using ________.',['if-else','while, do-while and for loops','#include','printf'],1);
+q('U1G','Which is NOT a characteristic of an algorithm?',['Instructions must be clear','Instructions must be effective','An instruction may repeat infinitely','Desired result must be obtained'],2);
+q('U1G','In an odd/even algorithm, the number is even when ________.',['A % 2 = 1','A % 2 = 0','A / 2 = 0','A * 2 = 0'],1);
+q('U1G','To swap A and B without a third variable, the steps are ________.',['A=A+B, B=A-B, A=A-B','A=B, B=A','A=A*B, B=A','C=A, A=B, B=C'],0);
+q('U1G','If A = 5 and B = 3, what are A and B after: A=A+B; B=A-B; A=A-B?',['A=5, B=3','A=3, B=5','A=8, B=5','A=8, B=3'],1);
+q('U1G','An algorithm to print 1 to 10 mainly uses ________.',['Sequence','Decision','Repetition','None'],2);
+q('U1G','An algorithm to find the maximum of two numbers mainly uses ________.',['Sequence','Decision','Repetition','Loop'],1);
+q('U1H','A flowchart is a ________ representation of a process.',['textual','graphical / symbolic','binary','audio'],1);
+q('U1H','The symbol used for Start/Stop is ________.',['Rectangle','Oval / rounded rectangle (terminal)','Diamond','Parallelogram'],1);
+q('U1H','The symbol used for Input/Output is ________.',['Parallelogram','Rectangle','Circle','Diamond'],0);
+q('U1H','The symbol used for processing (Sum = A + B) is ________.',['Diamond','Rectangle','Oval','Circle'],1);
+q('U1H','The symbol used for a decision (Is A > B?) is ________.',['Diamond','Rectangle','Parallelogram','Oval'],0);
+q('U1H','The symbol used as a connector is ________.',['Square','Circle','Diamond','Arrow'],1);
+q('U1H','Arrows (flow lines) in a flowchart show ________.',['data type','the flow of control / order of execution','memory','errors'],1);
+q('U1H','The first and last symbol of every flowchart is the ________ symbol.',['Process','Terminal','Decision','Connector'],1);
+q('U1H','Labelled connectors are mainly used in ________.',['very small flowcharts','complex or multi-sheet flowcharts','algorithms','C programs'],1);
+q('U1H','Which is a limitation of flowcharts?',['They help understand logic','Drawing them is laborious and time-consuming','They help communication','They help analysis'],1);
+q('U1H','The arrows coming out of a decision symbol should always be ________.',['coloured','labelled (Yes/No)','dotted','removed'],1);
+q('U1H','The formula used in the Simple Interest flowchart is ________.',['SI = P + R + N','SI = P * R * N / 100','SI = P * R / N','SI = (P * N) / R'],1);
+
+/* ---------- Unit 2 ---------- */
+q('U2A','C language was developed in the year ________.',['1967','1970','1972','1978'],2);
+q('U2A','C was developed by ________.',['Ken Thompson','Dennis Ritchie','Martin Richards','James Gosling'],1);
+q('U2A','C was developed at ________.',['Microsoft','IBM','Bell Laboratories','Apple'],2);
+q('U2A','C was initially developed for writing ________.',['games','system software','web pages','databases only'],1);
+q('U2A','The language that came just before C is ________.',['BCPL','B','ALGOL','COBOL'],1);
+q('U2A','Language B was developed by ________.',['Dennis Ritchie','Ken Thompson','Martin Richards','Kernighan'],1);
+q('U2A','BCPL was developed by ________.',['Ken Thompson','Martin Richards','Dennis Ritchie','ANSI Committee'],1);
+q('U2A','BCPL was developed in ________.',['1960','1967','1970','1972'],1);
+q('U2A','ALGOL was developed in 1960 by ________.',['Dennis Ritchie','International Group','ISO Committee','Ken Thompson'],1);
+q('U2A','K&R C (1978) is named after ________.',['Ken & Richards','Kernighan & Ritchie','Knuth & Ritchie','Kernighan & Richards'],1);
+q('U2A','ANSI C was introduced in ________.',['1978','1989','1990','1999'],1);
+q('U2A','ANSI/ISO C was introduced in ________.',['1989','1990','1999','1972'],1);
+q('U2A','C99 was introduced by the Standardization Committee in ________.',['1989','1990','1999','2009'],2);
+q('U2A','The correct order of evolution is ________.',['B → BCPL → ALGOL → C','ALGOL → BCPL → B → C','BCPL → ALGOL → B → C','ALGOL → B → BCPL → C'],1);
+q('U2A','C is a ________ programming language.',['general-purpose, structured','object-oriented only','markup','query'],0);
+q('U2A','C bridges the gap between ________.',['hardware and software','machine language and high-level languages','Java and Python','RAM and ROM'],1);
+q('U2A','C can be used for ________.',['systems programming only','applications programming only','both systems and applications programming','neither'],2);
+q('U2A','Which English keywords are mentioned in the C introduction?',['if, else, for, do, while','class, object','begin, end','select, from'],0);
+q('U2B','How many keywords does C have?',['30','32','34','48'],1);
+q('U2B','C is easy to learn because of its small size, which means ________.',['it has only 32 keywords','it uses little RAM','programs are 1 page','it has no functions'],0);
+q('U2B','C is called a middle-level language because ________.',['it is half compiled','it combines assembly-level power with high-level features','it is used only in middle schools','it has medium speed'],1);
+q('U2B','C is a ________ typed language.',['dynamically','statically','weakly-untyped','loosely'],1);
+q('U2B','In a statically typed language, the type of a variable is checked at ________.',['run time','compile time','link time','load time'],1);
+q('U2B','Storing C code as libraries for future reuse is called ________.',['Portability','Modularity','Extensibility','Robustness'],1);
+q('U2B','A C program can run on another system with no or small changes. This is ________.',['Modularity','Portability','Static typing','Efficiency'],1);
+q('U2B','Adding new features and operations to an existing C program is ________.',['Easy to extend','Portability','Modularity','Procedural'],0);
+q('U2B','C follows which programming paradigm?',['Object-oriented','Procedural','Logical','Functional only'],1);
+q('U2B','Which is NOT a feature of C?',['Portability','Modularity','Object-oriented (classes)','Rich set of operators'],2);
+q('U2B','According to the slides, the most commonly used other paradigm is ________.',['Procedural','Object-oriented','Logical','Assembly'],1);
+q('U2B','Why is C faster than Java or Python?',['It has more features','It is statically typed and has less extra processing','It needs internet','It has no compiler'],1);
+q('U2B','Which operating systems are listed as using C?',['Windows','Linux','Android','All of these'],3);
+q('U2B','Which databases are listed as using C?',['Oracle','MySQL','PostgreSQL','All of these'],3);
+q('U2B','C makes extensive use of ________.',['classes','function calls','objects','tags'],1);
+q('U2B','How many features of C are listed in the syllabus slides?',['5','8','10','12'],2);
+q('U2C','Execution of every C program begins from ________.',['the first function','main()','#include','printf()'],1);
+q('U2C','The documentation block contains ________.',['header files','comments','global variables','main()'],1);
+q('U2C','A single-line comment in C starts with ________.',['#','//','/*','--'],1);
+q('U2C','A multi-line comment in C is written as ________.',['// ... //','/* ... */','<!-- ... -->','# ... #'],1);
+q('U2C','The documentation block is ________.',['compulsory','optional','executed first','a function'],1);
+q('U2C','`#include` and `#define` are written in the ________ block.',['documentation','preprocessor directive','global declaration','function'],1);
+q('U2C','A variable declared outside main() and all functions is called ________.',['local variable','global variable','static function','constant'],1);
+q('U2C','User-defined functions are declared ________.',['inside main()','outside main()','inside printf()','inside header files only'],1);
+q('U2C','The two types of functions in C are ________.',['main and sub','library (built-in) and user-defined','static and auto','input and output'],1);
+q('U2C','`printf()` is a ________ function.',['user-defined','library (built-in)','main','recursive'],1);
+q('U2C','In `stdio.h`, "stdio" stands for ________.',['studio','standard input output','standard disk input output','static IO'],1);
+q('U2C','`clrscr()` is used to ________.',['clear the screen','close the program','read a character','print output'],0);
+q('U2C','`getch()` is used in Turbo C to ________.',['print a number','hold the output screen until a key is pressed','clear the screen','include files'],1);
+q('U2C','`clrscr()` and `getch()` are declared in the header file ________.',['stdio.h','conio.h','math.h','string.h'],1);
+q('U2C','`printf()` and `scanf()` are declared in ________.',['conio.h','stdio.h','math.h','stdlib.h'],1);
+q('U2C','Every C statement ends with a ________.',['colon :','semicolon ;','comma ,','full stop .'],1);
+q('U2C','How many blocks are there in the structure of a C program (as per slides)?',['3','4','5','6'],2);
+q('U2C','Which block is compulsory in every C program?',['Documentation','Global declaration','Main block','User-defined function'],2);
+q('U2C','A function is a ________.',['subprogram / block of statements that performs a particular task','header file','keyword','constant'],0);
+q('U2C','The body of main() is enclosed in ________.',['( )','[ ]','{ }','< >'],2);
+q('U2D','The first program that processes C source code is the ________.',['Compiler','Preprocessor','Linker','Loader'],1);
+q('U2D','The output of the preprocessor is ________.',['object code','expanded code','executable code','assembly code'],1);
+q('U2D','The compiler converts preprocessed code into ________.',['assembly code','executable code','source code','flowchart'],0);
+q('U2D','The assembler converts assembly code into ________.',['source code','object code','expanded code','algorithm'],1);
+q('U2D','The extension of an object file in DOS is ________.',['.c','.obj','.exe','.o'],1);
+q('U2D','The extension of an object file in UNIX is ________.',['.obj','.o','.exe','.out only'],1);
+q('U2D','The linker combines ________.',['two source files','object code of library files with the object code of our program','comments','header files with text'],1);
+q('U2D','The output of the linker is ________.',['.obj file','executable file (.exe)','.c file','.h file'],1);
+q('U2D','The program that loads the executable file into memory is the ________.',['Linker','Loader','Compiler','Assembler'],1);
+q('U2D','The extension of a C source file is ________.',['.c','.cpp','.exe','.obj'],0);
+q('U2D','If the source file is hello.c, its object file in DOS is ________.',['hello.exe','hello.obj','hello.o','hello.h'],1);
+q('U2D','Comments are removed from the program by the ________.',['Linker','Loader','Preprocessor','Assembler'],2);
+q('U2D','Symbolic constants (#define) are replaced by their values by the ________.',['Preprocessor','Compiler','Linker','Loader'],0);
+q('U2D','The correct order of execution stages is ________.',['Compiler → Preprocessor → Linker → Assembler','Preprocessor → Compiler → Assembler → Linker → Loader','Linker → Compiler → Loader','Assembler → Compiler → Linker'],1);
+q('U2E','The C character set includes ________.',['only letters','letters, digits and special characters','only digits','only symbols'],1);
+q('U2E','The smallest individual unit of a C program is a ________.',['statement','token','function','block'],1);
+q('U2E','As per the slides, tokens include ________.',['keywords, identifiers, constants','header files only','comments only','loops only'],0);
+q('U2E','Each word and punctuation mark in a C program is called a ________.',['token','block','header','library'],0);
+q('U2E','`\\n`, `\\t` and `\\b` are called ________.',['keywords','escape sequences','identifiers','operators'],1);
+q('U2E','An escape sequence like `\\n` represents ________.',['two characters','a single character','a string','a keyword'],1);
+q('U2F','Keywords are also called ________.',['identifiers','reserved words','variables','constants'],1);
+q('U2F','All C keywords are written in ________.',['uppercase','lowercase','mixed case','any case'],1);
+q('U2F','Which of the following is a keyword?',['main','printf','int','include'],2);
+q('U2F','Which of the following is NOT a keyword?',['sizeof','volatile','printf','goto'],2);
+q('U2F','Which of the following is NOT a keyword?',['auto','main','static','enum'],1);
+q('U2F','`sizeof` in C is a ________.',['function','keyword (operator)','header file','variable'],1);
+q('U2F','Can a keyword be used as a variable name?',['Yes, always','No','Only in main()','Only for int'],1);
+q('U2F','Which of the following is NOT a keyword?',['define','typedef','union','register'],0,'define is used with the preprocessor #, it is not a keyword.');
+q('U2F','Which set contains only keywords?',['int, float, main','if, else, while','printf, scanf, int','include, define, int'],1);
+q('U2F','Which keyword is used to declare a constant?',['static','const','define','final'],1);
+q('U2G','Identifiers are names given to ________.',['keywords','variables, arrays and functions','header files','operators'],1);
+q('U2G','Which is a valid identifier?',['2marks','_total','roll no','float'],1);
+q('U2G','Which is an invalid identifier?',['marks1','Roll_no','1num','HRA'],2,'It cannot start with a digit.');
+q('U2G','Which is an invalid identifier?',['total_marks','total marks','TotalMarks','_marks'],1,'Spaces are not allowed.');
+q('U2G','Which is an invalid identifier?',['a_b','ab','a$b','AB'],2);
+q('U2G','Which is an invalid identifier?',['Int','int','INT','_int'],1,'int is a keyword; Int and INT are allowed because C is case sensitive.');
+q('U2G','The only special character allowed in an identifier is ________.',['$','#','_ (underscore)','-'],2);
+q('U2G','An identifier must begin with ________.',['a digit','an alphabet or underscore','a special symbol','a space'],1);
+q('U2G','As per the slides, an identifier should not contain more than ________ characters.',['8','16','31','64'],2);
+q('U2G','In C, `Sum`, `sum` and `SUM` are ________.',['the same identifier','three different identifiers','keywords','invalid'],1,'C is case sensitive.');
+q('U2G','Which is a valid identifier?',['total-marks','num1','#num','9lives'],1);
+q('U2G','In `char name[20];` the word `name` is ________.',['a keyword','an identifier (array name)','a constant','a header'],1);
+q('U2H','Size of `char` is ________.',['1 byte','2 bytes','4 bytes','8 bytes'],0);
+q('U2H','Size of `int` in Turbo C (16-bit), as per slides, is ________.',['1 byte','2 bytes','4 bytes','8 bytes'],1,'On modern 32/64-bit GCC it is 4 bytes.');
+q('U2H','Size of `float` is ________.',['2 bytes','4 bytes','8 bytes','10 bytes'],1);
+q('U2H','Size of `double` is ________.',['4 bytes','6 bytes','8 bytes','10 bytes'],2);
+q('U2H','Size of `long double` (as per slides) is ________.',['8 bytes','10 bytes','12 bytes','16 bytes'],1);
+q('U2H','Size of `long int` (as per slides) is ________.',['2 bytes','4 bytes','8 bytes','1 byte'],1);
+q('U2H','The format specifier for `int` is ________.',['%c','%d','%f','%s'],1);
+q('U2H','The format specifier for `char` is ________.',['%c','%d','%f','%ch'],0);
+q('U2H','The format specifier for `float` is ________.',['%d','%f','%c','%s'],1);
+q('U2H','The format specifier commonly used to read a `double` with scanf is ________.',['%d','%lf','%c','%ld'],1);
+q('U2H','The format specifier for a string is ________.',['%c','%s','%d','%f'],1);
+q('U2H','Range of `char` (signed) is ________.',['0 to 255','-128 to 127','-32768 to 32767','0 to 65535'],1);
+q('U2H','Range of `int` (2 bytes) is ________.',['-128 to 127','-32768 to 32767','0 to 65535','-2147483648 to 2147483647'],1);
+q('U2H','Range of `unsigned int` (2 bytes) is ________.',['-32768 to 32767','0 to 65535','0 to 255','0 to 4294967295'],1);
+q('U2H','Range of `unsigned char` is ________.',['-128 to 127','0 to 255','0 to 127','0 to 65535'],1);
+q('U2H','Range of `float` is ________.',['3.4E-38 to 3.4E+38','1.7E-308 to 1.7E+308','-128 to 127','0 to 65535'],0);
+q('U2H','Range of `double` is ________.',['3.4E-38 to 3.4E+38','1.7E-308 to 1.7E+308','3.4E-4932 to 1.1E+4932','0 to 255'],1);
+q('U2H','Range of `unsigned long int` is ________.',['0 to 65535','0 to 4294967295','-2147483648 to 2147483647','0 to 255'],1);
+q('U2H','The data type `void` means ________.',['integer','valueless / no value','character','decimal'],1);
+q('U2H','Basic data types like int, char and float are also called ________ data types.',['derived','primitive','user-defined','abstract'],1);
+q('U2H','A data type decides ________.',['only the variable name','the number of bytes and valid operations for a variable','the file name','the output colour'],1);
+q('U2H','How many type modifiers (qualifiers) does C have, as per slides?',['2','3','4','5'],2,'short, long, signed, unsigned.');
+q('U2H','`short` and `long` are ________ qualifiers.',['sign','size','storage','access'],1);
+q('U2H','`signed` and `unsigned` are ________ qualifiers.',['sign','size','storage','memory'],0);
+q('U2H','Which data type cannot take type modifiers?',['int','char','void','double'],2);
+q('U2H','An `unsigned` variable can store ________.',['only negative values','only zero and positive values','only decimals','only characters'],1);
+q('U2H','Which data type is best to store the value 3.14?',['int','char','float','void'],2);
+q('U2H',"Which data type is used to store a single letter like 'A'?",['int','char','float','double'],1);
+q('U2H','The `long` modifier is used to ________.',['decrease size','increase the size of int or double','make value constant','make it unsigned'],1);
+q('U2I','How many storage classes are there in C?',['2','3','4','5'],2,'auto, extern, static, register.');
+q('U2I',"Storage classes describe a variable's ________.",['size and type','scope, visibility and lifetime','name only','format specifier'],1);
+q('U2I','The default storage class of a local variable is ________.',['static','auto','extern','register'],1);
+q('U2I','The default initial value of an `auto` variable is ________.',['zero','one','garbage value','null'],2);
+q('U2I','The default initial value of a `static` variable is ________.',['garbage','zero','one','-1'],1);
+q('U2I','The default initial value of an `extern` variable is ________.',['garbage','zero','one','undefined'],1);
+q('U2I','A `register` variable is stored in ________.',['stack','data segment','CPU register','hard disk'],2);
+q('U2I','An `auto` variable is stored in ________.',['CPU register','stack (memory)','data segment','ROM'],1);
+q('U2I','`static` and `extern` variables are stored in ________.',['stack','CPU register','data segment','cache'],2);
+q('U2I','The life of a `static` variable is ________.',['end of block','till the end of the program','one statement','one function call only'],1);
+q('U2I','The scope of an `extern` variable is ________.',['within the block','global, across multiple files','one line','only main()'],1);
+q('U2I','Which storage class gives the fastest access?',['auto','static','extern','register'],3);
+q('U2I','Which storage classes have a garbage default value?',['auto and register','static and extern','only static','all four'],0);
+q('U2J','A variable is ________.',['a fixed value','a meaningful name given to a data storage location in memory','a keyword','a header file'],1);
+q('U2J','The two basic kinds of variables in C (as per slides) are ________.',['numeric and character','local and global','static and auto','int and void'],0);
+q('U2J','Which is a correct variable declaration?',['a int;','int a;','int = a;','int a'],1);
+q('U2J','Which is a correct initialization?',['int roll_no = 5;','int 5 = roll_no;','roll_no int = 5;','int roll_no := 5;'],0);
+q('U2J','A variable declaration always ends with ________.',['a colon','a semicolon','a full stop','nothing'],1);
+q('U2J','A constant is a value that ________.',['changes during execution','does not change during execution','is always zero','is always a string'],1);
+q('U2J','Which keyword declares a constant variable?',['static','const','final','fixed'],1);
+q('U2J','How many types of constants are shown in the slides?',['2','3','4','5'],2,'Integer, floating point, character, string.');
+q('U2J',"`'a'` is a ________ constant.",['string','character','integer','float'],1);
+q('U2J','`"Hello"` is a ________ constant.',['character','string','integer','float'],1);
+q('U2J','`1234567L` is a valid ________ constant.',['float','long integer','character','unsigned char'],1);
+q('U2J','`12U` is a valid ________ constant.',['unsigned int','long','float','string'],0);
+q('U2J','`2.146E-3` is a ________ constant.',['integer','floating point (exponent form)','character','string'],1);
+q('U2J','A character constant is enclosed in ________.',['double quotes','single quotes','brackets','braces'],1);
+q('U2J','A string constant is enclosed in ________.',['single quotes','double quotes','brackets','slashes'],1);
+q('U2J','`1234` is of type ________ by default.',['float','int','long','char'],1);
+q('U2J','Characters of a string constant are stored in ________.',['random memory locations','successive memory locations','CPU registers','the hard disk'],1);
+q('U2J','After `const float pi = 3.14;` the statement `pi = 3.15;` will ________.',['change pi to 3.15','give a compile-time error','print 3.15','be ignored'],1);
+q('U2K','`\\n` is used for ________.',['new line','null','number','tab'],0);
+q('U2K','`\\t` is used for ________.',['vertical tab','horizontal tab','title','backspace'],1);
+q('U2K','`\\b` is used for ________.',['bell','backspace','blank line','bold'],1);
+q('U2K','`\\a` is used for ________.',['alarm / beep sound','add','new line','apostrophe'],0);
+q('U2K','`\\r` moves the cursor to ________.',['the next line','the start of the current line','the next page','the end of the line'],1);
+q('U2K','`\\f` is called ________.',['form feed','full stop','float','file'],0);
+q('U2K','`\\v` is used for ________.',['vertical tab','value','void','horizontal tab'],0);
+q('U2K','To print a backslash \\ we use ________.',['\\b','\\\\','\\/','//'],1);
+q('U2K','To print a double quote inside printf we use ________.',["\\'",'\\"','\\q','""'],1);
+q('U2K','To print a single quote we use ________.',["\\'",'\\"','\\s',"''"],0);
+q('U2K','Every escape sequence starts with ________.',['/ (forward slash)','\\ (backslash)','#','%'],1);
+q('U2K','`\\0` represents ________.',['zero digit','null character (end of string)','new line','tab'],1);
+q('U2L','A symbolic constant is defined using ________.',['const','#define','#include','static'],1);
+q('U2L','Which is the correct way to define a symbolic constant?',['#define PI = 3.14','#define PI 3.14','#define PI 3.14;','# define PI 3.14'],1);
+q('U2L','A `#define` line ends with ________.',['a semicolon','a colon','no semicolon','a comma'],2);
+q('U2L','`#define` is a ________.',['statement','preprocessor directive','keyword','function'],1);
+q('U2L','Symbolic constant names are usually written in ________.',['lowercase','CAPITAL letters (a convention, not a rule)','numbers','symbols'],1);
+q('U2L','A blank space between `#` and `define` is ________.',['required','not permitted','optional','required twice'],1);
+q('U2L','Symbolic constants are usually defined ________.',['at the end of the program','at the beginning of the program','inside printf','inside a loop'],1);
+
+/* ---------- C output and errors ---------- */
+q('OUT','What is the output?',['Hello World on one line','Hello on line 1, World on line 2','Hello\\nWorld','Error'],1,'',String.raw`printf("Hello\nWorld");`);
+q('OUT','What is the output?',['3.33','3','1','3.000000'],1,'Integer division drops the decimal part.',String.raw`int a = 10, b = 3;
+printf("%d", a / b);`);
+q('OUT','What is the output?',['3','1','0','10'],1,'% gives the remainder.',String.raw`int a = 10, b = 3;
+printf("%d", a % b);`);
+q('OUT','What is the output?',['2.500000','2.000000','2','2.5'],1,'10 / 4 is integer division (= 2) before it is stored in x.',String.raw`float x = 10 / 4;
+printf("%f", x);`);
+q('OUT','What is the output?',['2.000000','2.500000','2','Error'],1,'',String.raw`float x = 10.0 / 4;
+printf("%f", x);`);
+q('OUT','What is the output?',['16','11','13','10'],1,'* is done before +.',String.raw`printf("%d", 5 + 3 * 2);`);
+q('OUT','What is the output?',['5','2','7','Error'],2,'',String.raw`int a = 5;
+a = a + 2;
+printf("%d", a);`);
+q('OUT','What is the output?',['A','65','97','Error'],1,'%d prints the ASCII value.',String.raw`char c = 'A';
+printf("%d", c);`);
+q('OUT','What is the output?',['66','B','A','b'],1,'',String.raw`char c = 66;
+printf("%c", c);`);
+q('OUT','What is the output?',['0','26','32','Error'],2,'97 − 65 = 32.',String.raw`printf("%d", 'a' - 'A');`);
+q('OUT','What is the output?',['6.28','12.56','3.14','Error'],1,'',String.raw`#define PI 3.14
+float r = 2, a;
+a = PI * r * r;
+printf("%.2f", a);`);
+q('OUT','What is the output?',['3.14159','3.14','3.1','3'],1,'.2 shows 2 digits after the decimal point.',String.raw`printf("%.2f", 3.14159);`);
+q('OUT','What is the output?',['4 123','123 4','1 234','4 12'],0,'% 10 gives the last digit; / 10 removes it.',String.raw`int n = 1234;
+printf("%d %d", n % 10, n / 10);`);
+q('OUT','What is the output?',['1 0','0 1','3 4','1 1'],0,'7 is odd, 8 is even.',String.raw`printf("%d %d", 7 % 2, 8 % 2);`);
+q('OUT','What is the output?',['a=5 b=10','a=10 b=5','a=10 b=10','a=5 b=5'],1,'',String.raw`int a = 5, b = 10, c;
+c = a; a = b; b = c;
+printf("a=%d b=%d", a, b);`);
+q('OUT','What is the output?',['5 10','10 5','15 5','15 10'],1,'',String.raw`int a = 5, b = 10;
+a = a + b; b = a - b; a = a - b;
+printf("%d %d", a, b);`);
+q('OUT','What is the output?',['20','20.000000','60.000000','20.5'],1,'',String.raw`float avg = (10 + 20 + 30) / 3;
+printf("%f", avg);`);
+q('OUT','What is the output?',['10','100','1000','10000'],1,'Simple interest = 1000 × 5 × 2 / 100.',String.raw`int p = 1000, r = 5, n = 2;
+printf("%d", p * r * n / 100);`);
+q('OUT','What is the output?',['6 9','9 27','9 9','3 9'],1,'Square and cube.',String.raw`int a = 3;
+printf("%d %d", a * a, a * a * a);`);
+q('OUT','What is the output?',['C','"C"','\\"C\\"','Error'],1,'',String.raw`printf("\"C\"");`);
+q('OUT','What is the output?',['C:\\\\TC','C:\\TC','C:TC','Error'],1,'\\\\ prints one backslash.',String.raw`printf("C:\\TC");`);
+q('OUT','What is the output?',['1','2','4','8'],0,'',String.raw`printf("%d", sizeof(char));`);
+q('OUT','What happens with this line?',['No error','Error: an identifier cannot start with a digit','Prints 5','Prints 2a'],1,'',String.raw`int 2a = 5;`);
+q('OUT','What is wrong in this code?',['Nothing','Missing semicolon after int a = 5','Wrong format specifier','printf is misspelled'],1,'',String.raw`int a = 5
+printf("%d", a);`);
+q('OUT','What happens here?',['Prints 5','Prints 0','Error: sum is undeclared, C is case sensitive','Prints garbage'],2,'',String.raw`int Sum = 5;
+printf("%d", sum);`);
+q('OUT','What happens here?',['x becomes 10','Compile-time error: cannot modify a const','x stays 5 silently','Runtime error'],1,'',String.raw`const int x = 5;
+x = 10;`);
+q('OUT','Why does this code give an error?',['PI is in capitals','The ; after 3.14 is also substituted, so the line becomes 3.14; * 2 * 2;','#define needs =','No error'],1,'',String.raw`#define PI 3.14;
+float a = PI * 2 * 2;`);
+q('OUT','Is this variable name valid?',['Valid','Invalid: float is a keyword','Valid only in Turbo C','Valid if lowercase'],1,'',String.raw`int float = 10;`);
+
+BANK.forEach((x, i) => { x.id = i; });
+
+/* ---------- State ---------- */
+const S = { mode: 'practice', section: 'all', topic: 'all', shuffle: false, list: [], i: 0, picks: [], done: false };
+const SECTIONS = [
+  { id: 'all', name: 'All', test: () => true },
+  { id: 'u1', name: 'Unit 1', test: x => x.t.startsWith('U1') },
+  { id: 'u2', name: 'Unit 2', test: x => x.t.startsWith('U2') },
+  { id: 'out', name: 'C output', test: x => x.t === 'OUT' }
+];
+const $ = id => document.getElementById(id);
+const LETTERS = ['a', 'b', 'c', 'd'];
+
+function store(key, val) {
+  try { if (val === undefined) return localStorage.getItem(key); localStorage.setItem(key, val); } catch (e) { return null; }
+}
+function shuffle(arr) {
+  const a = arr.slice();
+  for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; }
+  return a;
+}
+function pool() {
+  const sec = SECTIONS.find(s => s.id === S.section);
+  return BANK.filter(x => sec.test(x) && (S.topic === 'all' || x.t === S.topic));
+}
+function el(tag, cls, text) {
+  const e = document.createElement(tag);
+  if (cls) e.className = cls;
+  if (text !== undefined) e.textContent = text;
+  return e;
+}
+/* Render text with `code` spans, safely */
+function rich(tag, cls, text) {
+  const e = el(tag, cls);
+  String(text).split('`').forEach((part, k) => {
+    if (!part) return;
+    if (k % 2) e.appendChild(el('code', '', part)); else e.appendChild(document.createTextNode(part));
+  });
+  return e;
+}
+
+function start() {
+  let p = pool();
+  if (S.mode === 'mock') p = shuffle(p).slice(0, 20);
+  else if (S.shuffle) p = shuffle(p);
+  S.list = p; S.i = 0; S.picks = new Array(p.length).fill(null); S.done = false;
+  render();
+}
+
+function buildToolbar() {
+  const box = $('sections');
+  box.textContent = '';
+  SECTIONS.forEach(s => {
+    const b = el('button', 'chip', s.name);
+    b.type = 'button'; b.id = 'sec-' + s.id;
+    b.setAttribute('aria-pressed', String(S.section === s.id));
+    b.appendChild(el('span', 'n', BANK.filter(s.test).length));
+    b.onclick = () => { S.section = s.id; S.topic = 'all'; buildToolbar(); start(); };
+    box.appendChild(b);
+  });
+  const sel = $('topic');
+  sel.textContent = '';
+  const sec = SECTIONS.find(s => s.id === S.section);
+  const all = el('option', '', 'All topics'); all.value = 'all'; sel.appendChild(all);
+  Object.keys(TOPICS).forEach(k => {
+    const n = BANK.filter(x => x.t === k && sec.test(x)).length;
+    if (!n) return;
+    const o = el('option', '', TOPICS[k] + ' (' + n + ')'); o.value = k; sel.appendChild(o);
+  });
+  sel.value = S.topic;
+  document.querySelectorAll('.seg button').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.mode === S.mode)));
+  $('shuf').checked = S.shuffle;
+  $('shuf').disabled = S.mode === 'mock';
+  const best = store('pp1-best');
+  $('best').textContent = best ? 'Best mock score on this device: ' + best + ' / 20' : 'Exam format: 20 MCQs. Try a Mock test to see where you stand.';
+}
+
+function render() {
+  const app = $('app');
+  app.textContent = '';
+  if (!S.list.length) {
+    const c = el('div', 'card');
+    c.appendChild(el('p', 'qtext', 'No questions match this filter.'));
+    c.appendChild(el('p', 'hint', 'Pick another section or topic above.'));
+    app.appendChild(c); return;
+  }
+  if (S.done) { renderResult(app); return; }
+  renderQuestion(app);
+}
+
+function renderQuestion(app) {
+  const item = S.list[S.i], pick = S.picks[S.i];
+  const practice = S.mode === 'practice';
+  const locked = practice && pick !== null;
+  const card = el('section', 'card');
+
+  const meta = el('div', 'meta');
+  const left = el('span');
+  left.appendChild(document.createTextNode('Question '));
+  left.appendChild(el('strong', '', (S.i + 1) + ' / ' + S.list.length));
+  meta.appendChild(left);
+  meta.appendChild(el('span', 'tag', TOPICS[item.t]));
+  card.appendChild(meta);
+
+  const answered = S.picks.filter(p => p !== null).length;
+  const bar = el('div', 'bar'); const fill = el('i');
+  fill.style.width = (answered / S.list.length * 100) + '%';
+  bar.appendChild(fill); card.appendChild(bar);
+
+  if (practice) {
+    const right = S.picks.filter((p, k) => p !== null && p === S.list[k].a).length;
+    const st = el('div', 'stats');
+    const a = el('span'); a.appendChild(document.createTextNode('Correct ')); a.appendChild(el('b', 'g', right));
+    const b = el('span'); b.appendChild(document.createTextNode('Wrong ')); b.appendChild(el('b', 'r', answered - right));
+    const c = el('span', '', 'Left ' + (S.list.length - answered));
+    st.append(a, b, c); card.appendChild(st);
+  }
+
+  card.appendChild(rich('p', 'qtext', item.text));
+  if (item.code) { const pre = el('pre'); pre.appendChild(el('code', '', item.code)); pre.firstChild.style.background = 'none'; pre.firstChild.style.padding = '0'; card.appendChild(pre); }
+
+  const list = el('ul', 'opts');
+  item.o.forEach((txt, k) => {
+    const li = el('li');
+    const b = el('button', 'opt');
+    b.type = 'button';
+    b.appendChild(el('span', 'bubble', LETTERS[k]));
+    b.appendChild(rich('span', 'otext', txt));
+    if (locked) {
+      b.disabled = true;
+      if (k === item.a) b.classList.add('right');
+      else if (k === pick) b.classList.add('wrong');
+    } else if (pick === k) b.classList.add('sel');
+    b.onclick = () => choose(k);
+    li.appendChild(b); list.appendChild(li);
+  });
+  card.appendChild(list);
+
+  if (locked) {
+    const ok = pick === item.a;
+    const fb = el('div', 'feedback ' + (ok ? 'ok' : 'no'));
+    fb.appendChild(el('b', '', ok ? 'Correct. ' : 'Not quite. Answer: (' + LETTERS[item.a] + ') '));
+    if (!ok) fb.appendChild(rich('span', '', item.o[item.a] + '. '));
+    if (item.note) fb.appendChild(rich('span', '', item.note));
+    card.appendChild(fb);
+  }
+
+  const nav = el('div', 'nav');
+  const prev = el('button', 'btn', 'Previous'); prev.type = 'button'; prev.disabled = S.i === 0;
+  prev.onclick = () => go(-1);
+  nav.appendChild(prev);
+  const last = S.i === S.list.length - 1;
+  let next;
+  if (S.mode === 'mock') {
+    next = el('button', 'btn primary', last ? 'Submit test' : 'Next');
+    next.onclick = () => last ? finish() : go(1);
+  } else {
+    next = el('button', 'btn primary', last ? 'See result' : 'Next');
+    next.onclick = () => last ? finish() : go(1);
+  }
+  next.type = 'button';
+  nav.appendChild(next);
+  if (S.mode === 'mock' && !last) {
+    const sub = el('button', 'btn', 'Submit now'); sub.type = 'button'; sub.onclick = finish; nav.appendChild(sub);
+  }
+  nav.appendChild(el('span', 'spacer'));
+  nav.appendChild(el('span', 'hint', 'Keys: A–D to answer, ← → to move'));
+  card.appendChild(nav);
+
+  if (S.mode === 'mock') {
+    const g = el('div', 'grid');
+    S.list.forEach((_, k) => {
+      const c = el('button', 'cell', k + 1); c.type = 'button';
+      c.setAttribute('aria-label', 'Go to question ' + (k + 1));
+      if (S.picks[k] !== null) c.classList.add('done');
+      if (k === S.i) c.classList.add('cur');
+      c.onclick = () => { S.i = k; render(); };
+      g.appendChild(c);
+    });
+    card.appendChild(g);
+  }
+  app.appendChild(card);
+}
+
+function choose(k) {
+  if (S.done) return;
+  if (S.mode === 'practice' && S.picks[S.i] !== null) return;
+  S.picks[S.i] = k;
+  render();
+}
+function go(d) {
+  const n = S.i + d;
+  if (n < 0 || n >= S.list.length) return;
+  S.i = n; render();
+}
+function finish() {
+  S.done = true;
+  if (S.mode === 'mock' && S.list.length === 20) {
+    const sc = S.picks.filter((p, k) => p === S.list[k].a).length;
+    const prev = Number(store('pp1-best') || 0);
+    if (sc > prev) store('pp1-best', String(sc));
+  }
+  buildToolbar();
+  render();
+}
+
+function renderResult(app) {
+  const total = S.list.length;
+  const attempted = S.picks.filter(p => p !== null).length;
+  const sc = S.picks.filter((p, k) => p === S.list[k].a).length;
+  const pct = Math.round(sc / total * 100);
+  const card = el('section', 'card');
+  card.appendChild(el('div', 'eyebrow', S.mode === 'mock' ? 'Mock test result' : 'Practice result'));
+  const row = el('div', 'score');
+  row.appendChild(el('span', 'big', sc + ' / ' + total));
+  const side = el('div');
+  side.appendChild(el('div', '', pct + '% correct · ' + attempted + ' attempted'));
+  side.appendChild(el('div', 'hint', pct >= 80 ? 'Exam-ready on this set. Try another mock or a weak topic.' : pct >= 50 ? 'Good base. Revise the topics of the wrong answers below.' : 'Read the notes for these topics, then try again.'));
+  row.appendChild(side);
+  card.appendChild(row);
+
+  if (S.mode === 'mock') {
+    const g = el('div', 'grid');
+    S.list.forEach((x, k) => {
+      const c = el('button', 'cell', k + 1); c.type = 'button';
+      c.classList.add(S.picks[k] === x.a ? 'right' : 'wrong');
+      c.setAttribute('aria-label', 'Question ' + (k + 1) + (S.picks[k] === x.a ? ' correct' : ' wrong'));
+      c.onclick = () => { const t = $('r-' + k); if (t) t.scrollIntoView({ behavior: 'smooth', block: 'center' }); };
+      g.appendChild(c);
+    });
+    card.appendChild(g);
+  }
+
+  const nav = el('div', 'nav');
+  const again = el('button', 'btn primary', S.mode === 'mock' ? 'New mock test' : 'Practice again'); again.type = 'button'; again.onclick = start;
+  nav.appendChild(again);
+  const wrongOnly = S.list.filter((x, k) => S.picks[k] !== x.a);
+  if (wrongOnly.length) {
+    const w = el('button', 'btn', 'Retry wrong ones (' + wrongOnly.length + ')'); w.type = 'button';
+    w.onclick = () => { S.mode = 'practice'; S.list = wrongOnly; S.i = 0; S.picks = new Array(wrongOnly.length).fill(null); S.done = false; buildToolbar(); render(); };
+    nav.appendChild(w);
+  }
+  card.appendChild(nav);
+
+  const rev = el('div', 'review');
+  rev.appendChild(el('h2', 'eyebrow', wrongOnly.length ? 'Questions to revise' : 'All answers correct'));
+  S.list.forEach((x, k) => {
+    if (S.picks[k] === x.a) return;
+    const it = el('div', 'ritem'); it.id = 'r-' + k;
+    it.appendChild(rich('div', 'q', (k + 1) + '. ' + x.text));
+    if (x.code) { const pre = el('pre'); pre.textContent = x.code; it.appendChild(pre); }
+    const a = el('div', 'a');
+    a.appendChild(document.createTextNode('Your answer: '));
+    a.appendChild(el('b', 'w', S.picks[k] === null ? 'not attempted' : '(' + LETTERS[S.picks[k]] + ') '));
+    if (S.picks[k] !== null) a.appendChild(rich('span', '', x.o[S.picks[k]]));
+    it.appendChild(a);
+    const b = el('div', 'a');
+    b.appendChild(document.createTextNode('Correct: '));
+    b.appendChild(el('b', 'r', '(' + LETTERS[x.a] + ') '));
+    b.appendChild(rich('span', '', x.o[x.a]));
+    if (x.note) { b.appendChild(document.createTextNode(' — ')); b.appendChild(rich('span', '', x.note)); }
+    it.appendChild(b);
+    it.appendChild(el('div', 'hint', TOPICS[x.t]));
+    rev.appendChild(it);
+  });
+  card.appendChild(rev);
+  app.appendChild(card);
+}
+
+/* ---------- Wiring ---------- */
+document.querySelectorAll('.seg button').forEach(b => {
+  b.onclick = () => { S.mode = b.dataset.mode; buildToolbar(); start(); };
+});
+$('topic').onchange = e => { S.topic = e.target.value; start(); };
+$('shuf').onchange = e => { S.shuffle = e.target.checked; start(); };
+$('restart').onclick = start;
+document.addEventListener('keydown', e => {
+  if (e.target.closest && e.target.closest('select, input')) return;
+  if (S.done || !S.list.length) return;
+  const k = 'abcd'.indexOf(e.key.toLowerCase());
+  const n = '1234'.indexOf(e.key);
+  if (k >= 0) choose(k); else if (n >= 0) choose(n);
+  else if (e.key === 'ArrowRight') go(1);
+  else if (e.key === 'ArrowLeft') go(-1);
+});
+
+buildToolbar();
+start();
+</script>
+</body>
+</html>
